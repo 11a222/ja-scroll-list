@@ -1,0 +1,17 @@
+{
+  "name": "ja-scroll-list",
+  "version": "1.0.1",
+  "description": "vue滚动列表 - 下拉刷新，上拉加载更多",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scroll-list",
+    "scroll-view",
+    "vue-scroll-list",
+    "vue-scroll-list"
+  ],
+  "author": "jack_lin",
+  "license": "ISC"
+}
