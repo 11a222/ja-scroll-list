@@ -182,10 +182,10 @@
               this.dropDownInfo.state !=2 && (this.dropDownInfo.state = 2);// 1:下拉可以刷新, 2:松开立即刷新, 3:正在刷新数据中...
             } else {
               this.dropDownInfo.state != 1 && (this.dropDownInfo.state = 1);// 1:下拉可以刷新, 2:松开立即刷新, 3:正在刷新数据中...
-              // 去掉会导致ios无法刷新
             }
-            e.cancelable && e.preventDefault();// 是否可以取消默认事件 && 取消默认事件
           }
+          // 去掉会导致ios无法刷新
+          e.cancelable && e.preventDefault();// 是否可以取消默认事件 && 取消默认事件
         } else {
           this.dropDownInfo.isDropDown = false
           this.dropDownInfo.state = 1
