@@ -1,5 +1,5 @@
 <template>
-  <scrollList class="scroll-list"
+  <ScrollList class="scroll-list"
               ref="scrollList"
               @onRefresh="onRefresh"
               @onLoadMore="onLoadMore"
@@ -17,13 +17,13 @@
       <!--    <div slot="loadMore-2" class="ja-more-tip">-->
       <!--      <span>我在加载中</span>-->
       <!--    </div>-->
-  </scrollList>
+  </ScrollList>
 </template>
 
 <script>
-  import scrollList from './ScrollList'
+  import { ScrollList } from './ScrollList'
   export default {
-    components:{scrollList},
+    components:{ScrollList},
     data () {
       return {
         listData: [],
