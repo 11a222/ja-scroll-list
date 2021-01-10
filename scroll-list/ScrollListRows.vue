@@ -10,7 +10,7 @@
       <slot :name="name"/>
     </template>
     <template>
-      <div v-for="(item, index) in listData" :key="index">
+      <div class="list-item" v-for="(item, index) in listData" :key="item[forKey] || ('list-' + index)">
         <slot :item="item" :index="index"></slot>
       </div>
     </template>
@@ -32,6 +32,14 @@
       },
       listKey: { // 获取列表数据的key 可以为 【body.list】形式
         type: String
+      },
+      forKey: { // v-for的key使用的字段
+        type: String,
+        default: 'id'
+      },
+      autoRefresh: { // 初始化自动执行下拉刷新
+        type: Boolean,
+        default: true
       }
     },
     components:{
@@ -46,9 +54,13 @@
     },
     mounted () {
       this.scrollListRef = this.$refs.scrollList
-      this.scrollListRef.refresh(0); // 0: 刷新成功(无停留), 1: 刷新成功(有停留), 2: 刷新失败(有停留)
+      this.autoRefresh && this.scrollListRef.refresh(0);// 主动触发下拉刷新
     },
     methods: {
+      refresh (...parm) {
+        return this.scrollListRef.refresh(...parm) // 主动触发下拉刷新
+      },
+      // 获取列表数据
       getListData (type) {
         if (type === 'refresh'){
           this.page = 1
@@ -92,3 +104,8 @@
     },
   }
 </script>
+<style scoped>
+  .list-item{
+    display: inline-block;
+  }
+</style>

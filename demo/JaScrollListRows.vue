@@ -1,21 +1,25 @@
 <template>
   <div class="page">
+    <PageHeader></PageHeader>
     <ScrollListRows class="scroll-list"
-                listKey="body"
-                :size="10"
-                :getList="getList">
-      <!--    <div slot="refresh-1" class="ja-pull-refresh">-->
-      <!--      <span>下拉可以刷新</span>-->
-      <!--    </div>-->
+                    ref="scrollList"
+                    listKey="body"
+                    vueKey="id"
+                    :size="20"
+                    :autoRefresh="false"
+                    :getList="getList">
+      <div slot="refresh-1" class="ja-pull-refresh">
+        <span>下拉可以刷新</span>
+      </div>
       <div slot-scope="{ item }" class="bank-box">
         <div class="bank-list">
           <div class="bank-icon"></div>
           <span class="bank-name">{{item}}</span>
         </div>
       </div>
-      <!--    <div slot="loadMore-2" class="ja-more-tip">-->
-      <!--      <span>我在加载中</span>-->
-      <!--    </div>-->
+      <div slot="loadMore-2" class="ja-more-tip">
+        <span>我在加载中</span>
+      </div>
     </ScrollListRows>
   </div>
 </template>
@@ -31,12 +35,10 @@
       ScrollListRows
     },
     data () {
-      return {
-        listData: [],
-      }
+      return {}
     },
     mounted() {
-      // this.$refs.scrollList.refresh();// 主动触发下拉刷新
+      this.$refs.scrollList.refresh();// 主动触发下拉刷新
     },
     methods: {
       getList (parm) {
@@ -61,7 +63,7 @@
     flex-direction: column;
   }
   .scroll-list {
-    flex: 1;
+    height: 100%;
   }
 
   .bank-box {
