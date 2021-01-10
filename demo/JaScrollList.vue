@@ -1,24 +1,22 @@
 <template>
   <scrollList class="scroll-list"
               ref="scrollList"
-              :refreshTips="{1: '下拉可以刷新'}"
-              :loadMoreTips="{2: '上拉可以加载更多'}"
               @onRefresh="onRefresh"
               @onLoadMore="onLoadMore"
               @onRefreshState="onRefreshState"
               @onLoadMoreState="onLoadMoreState">
-<!--    <div slot="refresh-1">-->
-<!--      <span>下拉可以刷新</span>-->
-<!--    </div>-->
+      <!--    <div slot="refresh-1" class="ja-pull-refresh">-->
+      <!--      <span>下拉可以刷新</span>-->
+      <!--    </div>-->
     <div class="bank-box">
       <div class="bank-list" v-for="item in listData" :key="item.id">
         <div class="bank-icon"></div>
         <span class="bank-name">{{item}}</span>
       </div>
     </div>
-<!--    <div slot="loadMore-2">-->
-<!--      <span>我在加载中</span>-->
-<!--    </div>-->
+      <!--    <div slot="loadMore-2" class="ja-more-tip">-->
+      <!--      <span>我在加载中</span>-->
+      <!--    </div>-->
   </scrollList>
 </template>
 
@@ -41,7 +39,7 @@
         // 这是全是静态数据,延时1600毫秒，给用户一个刷新的感觉，如果是接口数据的话，直接调接口即可
         setTimeout(() => {
           this.listData = ['招商银行', '民生银行', '平安联名', '兴业银行', '上海银行', '交通银行', '光大银行', '全部银行'];
-          this.$refs.scrollList.refreshDone(1);// 0: 刷新完成, 1: 刷新成功, 2: 刷新失败
+          this.$refs.scrollList.refreshDone(1, '刷新成功啦');// 0: 刷新完成, 1: 刷新成功, 2: 刷新失败
         }, 1600)
       },
 
@@ -51,7 +49,7 @@
         setTimeout(() => {
           this.listData = [...this.listData, ...this.listData];
           if(this.listData.length > 20){
-            this.$refs.scrollList.loadMoreDone(1);// 0: 上拉加载更多, 1: 我是有底线的
+            this.$refs.scrollList.loadMoreDone(1, '-- 我是有底线的呀 --');// 0: 上拉加载更多, 1: 我是有底线的
           }else{
             this.$refs.scrollList.loadMoreDone(0);// 0: 上拉加载更多, 1: 我是有底线的
           }

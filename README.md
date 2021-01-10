@@ -4,14 +4,18 @@
 ~~~
 npm install ja-scroll-list --save
 ~~~
+##版本更新
+>1.1.0 新增 ScrollListRows 组件
+
+
 ## 引入
 ~~~
-import scrollList from 'ja-scroll-list';
+import { ScrollList, ScrollListRows } from 'ja-scroll-list';
 ~~~
 
 ## 快速使用
 ~~~
-import ScrollList from 'ja-scroll-list';// 引入ja-scroll-list
+import { ScrollList } from 'ja-scroll-list';// 引入ja-scroll-list
 <ScrollList ref="scrollList" @onRefresh="onRefresh" @onLoadMore="onLoadMore">
    <div class="bank-list" v-for="item in 20">
       <span class="bank-name">{{item}}</span>
@@ -96,21 +100,19 @@ import ScrollList from 'ja-scroll-list';// 引入ja-scroll-list
 ## 配置说明
 | 参数   | 类型   | 默认  | 描述        |
 | -------| ------ |  ------- | ---------|
-| refreshTips| Object | {'1': '下拉刷新','2': '释放刷新','3': '刷新中...','4': '刷新完成','5': '刷新成功','6': '刷新失败'} |  | 下拉刷新提示|
-| loadMoreTips| Object | {'1': '上拉加载更多','2': '数据加载中..','3': '我是有底线的!'} |  | 上拉加载更多提示|
 | onRefresh| Function | | 下拉刷新回调|
-| onLoadMore| Function |  | 上拉加载更多回调|
-| onScroll| Function |  |  | 列表滚动事件回调(返回列表对象dom)|
+| onLoadMore| Function | 返回{refreshDone:function, loadMoreDone: functon} | 上拉加载更多回调|
+| onScroll| Function | 返回{refreshDone:function, loadMoreDone: functon} |  | 列表滚动事件回调(返回列表对象dom)|
 | onRefreshState| Function |  | 下拉刷新控件状态改变回调|
 | onLoadMoreState| Function |  | 上拉加载更多控件状态改变回调|
 
 
 ## API说明
-| 参数   | 类型   | 参数说明  | 默认参数  | 描述        |
-| -------| ------ |  ------- |  ------- | ---------|
-| refresh| Function | 无 |  无 | 主动触发下拉刷新|
-| refreshDone| Function | state: 0: 刷新完成, 1: 刷新成功, 2: 刷新失败 | 0 | 关闭下拉刷新|
-| loadMoreDone| Function | state: 0: 上拉加载更多, 1: 我是有底线的 | 0 | 下拉刷新控件状态改变回调|
+| 参数   | 类型   | 参数1  | 参数2  | 描述        |
+| -------| ------ |   ------- |  ------- | ---------|
+| refresh| Function() | 无 |  无 | 主动触发下拉刷新|
+| refreshDone| Function(state, tip) | state: 0: 刷新完成, 1: 刷新成功, 2: 刷新失败 | tip: '自定义' | 关闭下拉刷新|
+| loadMoreDone| Function(state, tip) | state: 0: 上拉加载更多, 1: 我是有底线的 | tip: '自定义'  | 下拉刷新控件状态改变回调|
 
 ## 下拉刷新 -- 插槽说明
 ~~~
@@ -124,13 +126,13 @@ import ScrollList from 'ja-scroll-list';// 引入ja-scroll-list
     <span>刷新中...</span>
   </div>
   <div slot="refresh-4">
-    <span>刷新完成</span>
+    <span>刷新完成(无停留)</span>
   </div>
   <div slot="refresh-5">
-    <span>刷新成功</span>
+    <span>刷新成功(有停留)</span>
   </div>
   <div slot="refresh-5">
-    <span>刷新失败</span>
+    <span>刷新失败(有停留)</span>
   </div>
 ~~~
 
